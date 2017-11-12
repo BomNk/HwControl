@@ -1,21 +1,31 @@
-#define DIR1_PIN 0
-#define STEP1_PIN 1
-#define DIR2_PIN 2
-#define STEP2_PIN 3
-#define DIR3_PIN 4
-#define STEP3_PIN 5
-#define DIR4_PIN 6
-#define STEP4_PIN 7
+#define DIR1_PIN 2
+#define STEP1_PIN 3
+#define DIR2_PIN 4
+#define STEP2_PIN 5
+#define DIR3_PIN 6
+#define STEP3_PIN 7
+#define DIR4_PIN 8
+#define STEP4_PIN 9
 //Create By BomNk
 #define LED 13
 int numstep=520; // 90 Degree
 int step=numstep;
-int ch;
+char ch;
+int i;
 
-void step1(int ch);
+void step1(char ch);
+void step2(char ch);
+void step3(char ch);
+void step4(char ch);
 void setup(){
     pinMode(DIR1_PIN, OUTPUT);
     pinMode(STEP1_PIN, OUTPUT);
+    pinMode(DIR2_PIN, OUTPUT);
+    pinMode(STEP2_PIN, OUTPUT);
+    pinMode(DIR3_PIN, OUTPUT);
+    pinMode(STEP3_PIN, OUTPUT);
+    pinMode(DIR4_PIN, OUTPUT);
+    pinMode(STEP4_PIN, OUTPUT);
     pinMode(LED,OUTPUT);
     
     Serial.begin(9600);
@@ -26,10 +36,14 @@ void loop(){
    
    //digitalWrite(DIR_PIN,HIGH);
    ch = Serial.read();
-   step1(ch);
+   //while(ch)
+      step1(ch);
+      step2(ch);
+      step3(ch);
+      step4(ch);
    
 }
-void step1(int ch){
+void step1(char ch){
     if(ch == 'a'){
        digitalWrite(LED,HIGH);
        digitalWrite(DIR1_PIN,LOW);
@@ -44,6 +58,7 @@ void step1(int ch){
        }
     }
    if(ch == 'A'){
+    digitalWrite(LED,LOW);
    digitalWrite(DIR1_PIN,HIGH);
    for(int i=0;i<515;i++){
           //if(digitalRead(SW)==1){
@@ -57,7 +72,7 @@ void step1(int ch){
       }
    }
 }
-void step2(int ch){
+void step2(char ch){
     if(ch == 'b'){
        digitalWrite(LED,HIGH);
        digitalWrite(DIR2_PIN,LOW);
@@ -85,7 +100,7 @@ void step2(int ch){
       }
    }
 }
-void step3(int ch){
+void step3(char ch){
     if(ch == 'c'){
        digitalWrite(LED,HIGH);
        digitalWrite(DIR3_PIN,LOW);
@@ -113,7 +128,7 @@ void step3(int ch){
       }
    }
 }
-void step4(int ch){
+void step4(char ch){
     if(ch == 'd'){
        digitalWrite(LED,HIGH);
        digitalWrite(DIR4_PIN,LOW);
@@ -128,6 +143,7 @@ void step4(int ch){
        }
     }
    if(ch == 'D'){
+    digitalWrite(LED,HIGH);
    digitalWrite(DIR4_PIN,HIGH);
    for(int i=0;i<515;i++){
           //if(digitalRead(SW)==1){
