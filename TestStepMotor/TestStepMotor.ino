@@ -30,8 +30,11 @@ void left(char ch);
 void back(char ch);
 void right(char ch);
 
-void left_right(char ch);
-void front_back(char ch);
+void left_right_totate(char ch);
+void front_back_rotate(char ch);
+
+void left_right_slide(char ch);
+void front_back_slide(char ch);
 
 
 
@@ -64,8 +67,10 @@ void loop(){
       back(ch);
       right(ch);
 
-      left_right(ch);
-      front_back(ch);
+      left_right_rotate(ch);
+      front_back_rotate(ch);
+      left_right_slide(ch);
+      front_back_slide(ch);
      
 }
 // ส่วนของการหมุนลูกรูบิค
@@ -183,7 +188,7 @@ void right(char ch){
    }
 }
 
-void left_right(char ch){
+void left_right_rotate(char ch){
   if(ch == 'a'){ // หมุนทวนทางซ้าย
          digitalWrite(DIR2_PIN,LOW);
          digitalWrite(DIR4_PIN,HIGH);
@@ -213,9 +218,10 @@ void left_right(char ch){
              
            // }
          }
+     }
 }
 
-void front_back(char ch){
+void front_back_rotate(char ch){
     if(ch == 'd'){ // หมุนทวนทางหน้า
          digitalWrite(DIR1_PIN,LOW);
          digitalWrite(DIR3_PIN,HIGH);
@@ -245,9 +251,67 @@ void front_back(char ch){
              
            // }
          }
+     }
 }
 
-
+void left_right_slide(char ch){
+   if(ch == 'j'){
+      
+       digitalWrite(DIR5_PIN,LOW);
+       for(int i=0;i<numstep_slide;i++){
+          //if(digitalRead(SW)==1){
+           digitalWrite(STEP5_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP5_PIN,LOW);
+           delay(sleep);
+           
+         // }
+       }
+    }
+   if(ch == 'J'){
+    
+    digitalWrite(DIR5_PIN,HIGH);
+    for(int i=0;i<numstep_slide;i++){
+          //if(digitalRead(SW)==1){
+           digitalWrite(STEP5_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP5_PIN,LOW);
+           delay(sleep);
+           
+          //}
+       
+      }
+   }
+}
+void front_back_slide(char ch){
+   if(ch == 'k'){
+      
+       digitalWrite(DIR6_PIN,LOW);
+       for(int i=0;i<numstep_slide;i++){
+          //if(digitalRead(SW)==1){
+           digitalWrite(STEP6_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP6_PIN,LOW);
+           delay(sleep);
+           
+         // }
+       }
+    }
+   if(ch == 'K'){
+    
+    digitalWrite(DIR6_PIN,HIGH);
+    for(int i=0;i<numstep_slide;i++){
+          //if(digitalRead(SW)==1){
+           digitalWrite(STEP6_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP6_PIN,LOW);
+           delay(sleep);
+           
+          //}
+       
+      }
+   }
+}
 
 /*
 void rotate(int steps, float speed){
