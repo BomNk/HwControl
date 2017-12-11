@@ -6,17 +6,35 @@
 #define STEP3_PIN 7
 #define DIR4_PIN 8
 #define STEP4_PIN 9
+
+#define DIR5_PIN 10
+#define STEP5_PIN 11
+#define DIR6_PIN 13
+#define STEP6_PIN 12
+
+
+
+
 //Create By BomNk
-#define LED 13
-int numstep=520; // 90 Degree
-int step=numstep;
+int sleep = 3;
+//int numstep=520; // 90 Degree
+int numstep = 50;
+int numstep_slide = 150;
+
 char ch;
 int i;
 
-void step1(char ch);
-void step2(char ch);
-void step3(char ch);
-void step4(char ch);
+
+void front(char ch);
+void left(char ch);
+void back(char ch);
+void right(char ch);
+
+void left_right(char ch);
+void front_back(char ch);
+
+
+
 void setup(){
     pinMode(DIR1_PIN, OUTPUT);
     pinMode(STEP1_PIN, OUTPUT);
@@ -26,7 +44,11 @@ void setup(){
     pinMode(STEP3_PIN, OUTPUT);
     pinMode(DIR4_PIN, OUTPUT);
     pinMode(STEP4_PIN, OUTPUT);
-    pinMode(LED,OUTPUT);
+
+    pinMode(DIR5_PIN,OUTPUT);
+    pinMode(STEP5_PIN,OUTPUT);
+    pinMode(DIR6_PIN,OUTPUT);
+    pinMode(STEP6_PIN,OUTPUT);
     
     Serial.begin(9600);
     
@@ -37,125 +59,192 @@ void loop(){
    //digitalWrite(DIR_PIN,HIGH);
    ch = Serial.read();
    //while(ch)
-      step1(ch);
-      step2(ch);
-      step3(ch);
-      step4(ch);
-   
+      front(ch);
+      left(ch);
+      back(ch);
+      right(ch);
+
+      left_right(ch);
+      front_back(ch);
+     
 }
-void step1(char ch){
-    if(ch == 'a'){
-       digitalWrite(LED,HIGH);
+// ส่วนของการหมุนลูกรูบิค
+void front(char ch){
+    if(ch == 'f'){
+       //digitalWrite(LED,HIGH);
        digitalWrite(DIR1_PIN,LOW);
-       for(int i=0;i<515;i++){
+       for(int i=0;i<numstep;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP1_PIN,HIGH);
-           delay(1);
+           delay(sleep);
            digitalWrite(STEP1_PIN,LOW);
-           delay(1);
+           delay(sleep);
            
          // }
        }
     }
-   if(ch == 'A'){
-    digitalWrite(LED,LOW);
-   digitalWrite(DIR1_PIN,HIGH);
-   for(int i=0;i<515;i++){
+   if(ch == 'F'){
+       //digitalWrite(LED,LOW);
+       digitalWrite(DIR1_PIN,HIGH);
+       for(int i=0;i<numstep;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP1_PIN,HIGH);
-           delay(1);
+           delay(sleep);
            digitalWrite(STEP1_PIN,LOW);
-           delay(1);
+           delay(sleep);
+           
+         // }
+       }
+    }
+}
+void left(char ch){
+    if(ch == 'l'){
+       //digitalWrite(LED,HIGH);
+       digitalWrite(DIR2_PIN,LOW);
+       for(int i=0;i<numstep;i++){
+          //if(digitalRead(SW)==1){
+           digitalWrite(STEP2_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP2_PIN,LOW);
+           delay(sleep);
+           
+         // }
+       }
+    }
+   if(ch == 'L'){
+      digitalWrite(DIR2_PIN,HIGH);
+      for(int i=0;i<numstep;i++){
+          //if(digitalRead(SW)==1){
+           digitalWrite(STEP2_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP2_PIN,LOW);
+           delay(sleep);
            
           //}
        
       }
    }
 }
-void step2(char ch){
+void back(char ch){
     if(ch == 'b'){
-       digitalWrite(LED,HIGH);
-       digitalWrite(DIR2_PIN,LOW);
-       for(int i=0;i<515;i++){
+       //digitalWrite(LED,HIGH);
+       digitalWrite(DIR3_PIN,LOW);
+       for(int i=0;i<numstep;i++){
           //if(digitalRead(SW)==1){
-           digitalWrite(STEP2_PIN,HIGH);
-           delay(1);
-           digitalWrite(STEP2_PIN,LOW);
-           delay(1);
+           digitalWrite(STEP3_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP3_PIN,LOW);
+           delay(sleep);
            
          // }
        }
     }
    if(ch == 'B'){
-   digitalWrite(DIR2_PIN,HIGH);
-   for(int i=0;i<515;i++){
-          //if(digitalRead(SW)==1){
-           digitalWrite(STEP2_PIN,HIGH);
-           delay(1);
-           digitalWrite(STEP2_PIN,LOW);
-           delay(1);
-           
-          //}
-       
-      }
-   }
-}
-void step3(char ch){
-    if(ch == 'c'){
-       digitalWrite(LED,HIGH);
-       digitalWrite(DIR3_PIN,LOW);
-       for(int i=0;i<515;i++){
-          //if(digitalRead(SW)==1){
-           digitalWrite(STEP3_PIN,HIGH);
-           delay(1);
-           digitalWrite(STEP3_PIN,LOW);
-           delay(1);
-           
-         // }
-       }
-    }
-   if(ch == 'C'){
    digitalWrite(DIR3_PIN,HIGH);
-   for(int i=0;i<515;i++){
+   for(int i=0;i<numstep;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP3_PIN,HIGH);
-           delay(1);
+           delay(sleep);
            digitalWrite(STEP3_PIN,LOW);
-           delay(1);
+           delay(sleep);
            
           //}
        
       }
    }
 }
-void step4(char ch){
-    if(ch == 'd'){
-       digitalWrite(LED,HIGH);
+void right(char ch){
+    if(ch == 'r'){
+      
        digitalWrite(DIR4_PIN,LOW);
-       for(int i=0;i<515;i++){
+       for(int i=0;i<numstep;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP4_PIN,HIGH);
-           delay(1);
+           delay(sleep);
            digitalWrite(STEP4_PIN,LOW);
-           delay(1);
+           delay(sleep);
            
          // }
        }
     }
-   if(ch == 'D'){
-    digitalWrite(LED,HIGH);
-   digitalWrite(DIR4_PIN,HIGH);
-   for(int i=0;i<515;i++){
+   if(ch == 'R'){
+    
+    digitalWrite(DIR4_PIN,HIGH);
+    for(int i=0;i<numstep;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP4_PIN,HIGH);
-           delay(1);
+           delay(sleep);
            digitalWrite(STEP4_PIN,LOW);
-           delay(1);
+           delay(sleep);
            
           //}
        
       }
    }
+}
+
+void left_right(char ch){
+  if(ch == 'a'){ // หมุนทวนทางซ้าย
+         digitalWrite(DIR2_PIN,LOW);
+         digitalWrite(DIR4_PIN,HIGH);
+         for(int i=0;i<numstep;i++){
+            //if(digitalRead(SW)==1){
+             digitalWrite(STEP2_PIN,HIGH);
+             digitalWrite(STEP4_PIN,HIGH);
+             delay(sleep);
+             digitalWrite(STEP2_PIN,LOW);
+             digitalWrite(STEP4_PIN,LOW);
+             delay(sleep);
+             
+           // }
+         }
+      }
+     if(ch == 'A'){ // หมุนตามตัวทางซ้าย
+         digitalWrite(DIR2_PIN,HIGH);
+         digitalWrite(DIR4_PIN,LOW);
+         for(int i=0;i<numstep;i++){
+            //if(digitalRead(SW)==1){
+             digitalWrite(STEP2_PIN,HIGH);
+             digitalWrite(STEP4_PIN,HIGH);
+             delay(sleep);
+             digitalWrite(STEP2_PIN,LOW);
+             digitalWrite(STEP4_PIN,LOW);
+             delay(sleep);
+             
+           // }
+         }
+}
+
+void front_back(char ch){
+    if(ch == 'd'){ // หมุนทวนทางหน้า
+         digitalWrite(DIR1_PIN,LOW);
+         digitalWrite(DIR3_PIN,HIGH);
+         for(int i=0;i<numstep;i++){
+            //if(digitalRead(SW)==1){
+             digitalWrite(STEP1_PIN,HIGH);
+             digitalWrite(STEP3_PIN,HIGH);
+             delay(sleep);
+             digitalWrite(STEP1_PIN,LOW);
+             digitalWrite(STEP3_PIN,LOW);
+             delay(sleep);
+             
+           // }
+         }
+      }
+     if(ch == 'D'){ // หมุนตามตัวทางหน้า
+         digitalWrite(DIR1_PIN,HIGH);
+         digitalWrite(DIR3_PIN,LOW);
+         for(int i=0;i<numstep;i++){
+            //if(digitalRead(SW)==1){
+             digitalWrite(STEP1_PIN,HIGH);
+             digitalWrite(STEP3_PIN,HIGH);
+             delay(sleep);
+             digitalWrite(STEP1_PIN,LOW);
+             digitalWrite(STEP3_PIN,LOW);
+             delay(sleep);
+             
+           // }
+         }
 }
 
 
