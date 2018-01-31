@@ -255,7 +255,7 @@ void front_back_rotate(char ch){
 }
 
 void left_right_slide(char ch){
-   if(ch == 'j'){
+   if(ch == 'J'){
       
        digitalWrite(DIR5_PIN,LOW);
        for(int i=0;i<numstep_slide;i++){
@@ -268,7 +268,7 @@ void left_right_slide(char ch){
          // }
        }
     }
-   if(ch == 'J'){
+   if(ch == 'j'){
     
     digitalWrite(DIR5_PIN,HIGH);
     for(int i=0;i<numstep_slide;i++){
@@ -282,6 +282,10 @@ void left_right_slide(char ch){
        
       }
    }
+
+
+
+   
 }
 void front_back_slide(char ch){
    if(ch == 'k'){
