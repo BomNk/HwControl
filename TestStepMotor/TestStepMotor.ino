@@ -1,5 +1,7 @@
-#define DIR1_PIN 2
-#define STEP1_PIN 3
+#include<Servo.h>
+
+#define DIR1_PIN 3
+#define STEP1_PIN 2
 #define DIR2_PIN 4
 #define STEP2_PIN 5
 #define DIR3_PIN 6
@@ -16,13 +18,15 @@
 
 
 //Create By BomNk
-int sleep = 3;
+int sleep = 5;
 //int numstep=520; // 90 Degree
 int numstep = 50;
 int numstep_slide = 150;
 
 char ch;
 int i;
+
+Servo servo1,servo2;
 
 
 void front(char ch);
@@ -52,6 +56,10 @@ void setup(){
     pinMode(STEP5_PIN,OUTPUT);
     pinMode(DIR6_PIN,OUTPUT);
     pinMode(STEP6_PIN,OUTPUT);
+
+    servo1.attach(10);
+    servo2.attach(11);
+    
     
     Serial.begin(9600);
     
@@ -257,30 +265,13 @@ void front_back_rotate(char ch){
 void left_right_slide(char ch){
    if(ch == 'J'){
       
-       digitalWrite(DIR5_PIN,LOW);
-       for(int i=0;i<numstep_slide;i++){
-          //if(digitalRead(SW)==1){
-           digitalWrite(STEP5_PIN,HIGH);
-           delay(sleep);
-           digitalWrite(STEP5_PIN,LOW);
-           delay(sleep);
-           
-         // }
-       }
+       servo1.write(100);
+       delay(500);
     }
    if(ch == 'j'){
     
-    digitalWrite(DIR5_PIN,HIGH);
-    for(int i=0;i<numstep_slide;i++){
-          //if(digitalRead(SW)==1){
-           digitalWrite(STEP5_PIN,HIGH);
-           delay(sleep);
-           digitalWrite(STEP5_PIN,LOW);
-           delay(sleep);
-           
-          //}
-       
-      }
+       servo1.write(0);
+       delay(500);
    }
 
 
@@ -290,30 +281,13 @@ void left_right_slide(char ch){
 void front_back_slide(char ch){
    if(ch == 'k'){
       
-       digitalWrite(DIR6_PIN,LOW);
-       for(int i=0;i<numstep_slide;i++){
-          //if(digitalRead(SW)==1){
-           digitalWrite(STEP6_PIN,HIGH);
-           delay(sleep);
-           digitalWrite(STEP6_PIN,LOW);
-           delay(sleep);
-           
-         // }
-       }
+       servo2.write(0);
+       delay(500);
     }
    if(ch == 'K'){
-    
-    digitalWrite(DIR6_PIN,HIGH);
-    for(int i=0;i<numstep_slide;i++){
-          //if(digitalRead(SW)==1){
-           digitalWrite(STEP6_PIN,HIGH);
-           delay(sleep);
-           digitalWrite(STEP6_PIN,LOW);
-           delay(sleep);
-           
-          //}
+       servo2.write(100);
+       delay(500);
        
-      }
    }
 }
 
