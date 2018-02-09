@@ -1,6 +1,6 @@
 #include<Servo.h>
 
-#define DIR1_PIN 3
+#define DIR1_PIN 13
 #define STEP1_PIN 2
 #define DIR2_PIN 4
 #define STEP2_PIN 5
@@ -8,17 +8,18 @@
 #define STEP3_PIN 7
 #define DIR4_PIN 8
 #define STEP4_PIN 9
-
+/*
 #define DIR5_PIN 10
 #define STEP5_PIN 11
 #define DIR6_PIN 13
 #define STEP6_PIN 12
-
+*/
 
 
 
 //Create By BomNk
 int sleep = 5;
+
 //int numstep=520; // 90 Degree
 int numstep = 50;
 int numstep_slide = 150;
@@ -35,9 +36,11 @@ void back(char ch);
 void right(char ch);
 
 void left_right_totate(char ch);
+//delay(500);
 void front_back_rotate(char ch);
-
+//delay(500);
 void left_right_slide(char ch);
+//delay(500);
 void front_back_slide(char ch);
 
 
@@ -52,15 +55,15 @@ void setup(){
     pinMode(DIR4_PIN, OUTPUT);
     pinMode(STEP4_PIN, OUTPUT);
 
-    pinMode(DIR5_PIN,OUTPUT);
+/*    pinMode(DIR5_PIN,OUTPUT);
     pinMode(STEP5_PIN,OUTPUT);
     pinMode(DIR6_PIN,OUTPUT);
-    pinMode(STEP6_PIN,OUTPUT);
+    pinMode(STEP6_PIN,OUTPUT);*/
 
     servo1.attach(10);
     servo2.attach(11);
     
-    
+   
     Serial.begin(9600);
     
 }
@@ -266,12 +269,12 @@ void left_right_slide(char ch){
    if(ch == 'J'){
       
        servo1.write(100);
-       delay(500);
+       delay(250);
     }
    if(ch == 'j'){
     
        servo1.write(0);
-       delay(500);
+       delay(250);
    }
 
 
@@ -282,11 +285,11 @@ void front_back_slide(char ch){
    if(ch == 'k'){
       
        servo2.write(0);
-       delay(500);
+       delay(250);
     }
    if(ch == 'K'){
        servo2.write(100);
-       delay(500);
+       delay(250);
        
    }
 }
