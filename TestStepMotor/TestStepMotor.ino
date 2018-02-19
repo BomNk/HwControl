@@ -6,8 +6,13 @@
 #define STEP2_PIN 5
 #define DIR3_PIN 6
 #define STEP3_PIN 7
-#define DIR4_PIN 8
-#define STEP4_PIN 9
+#define DIR4_PIN 9
+#define STEP4_PIN 8
+
+#define Ms_F A0
+#define Ms_L A1
+#define Ms_B A2
+#define Ms_R A3
 /*
 #define DIR5_PIN 10
 #define STEP5_PIN 11
@@ -19,6 +24,7 @@
 
 //Create By BomNk
 int sleep = 5;
+int sleep1 = 10;
 
 //int numstep=520; // 90 Degree
 int numstep = 50;
@@ -60,9 +66,21 @@ void setup(){
     pinMode(DIR6_PIN,OUTPUT);
     pinMode(STEP6_PIN,OUTPUT);*/
 
+    pinMode(Ms_F,OUTPUT);
+    pinMode(Ms_L,OUTPUT);
+    pinMode(Ms_B,OUTPUT);
+    pinMode(Ms_R,OUTPUT);
+
     servo1.attach(10);
     servo2.attach(11);
     
+   servo1.write(80);
+   servo2.write(0);
+
+   digitalWrite(Ms_F,LOW);
+   digitalWrite(Ms_L,LOW);
+   digitalWrite(Ms_B,LOW);
+   digitalWrite(Ms_R,LOW);
    
     Serial.begin(9600);
     
@@ -201,80 +219,102 @@ void right(char ch){
 
 void left_right_rotate(char ch){
   if(ch == 'a'){ // หมุนทวนทางซ้าย
+         digitalWrite(Ms_L,HIGH);
+         digitalWrite(Ms_R,HIGH);
+         
          digitalWrite(DIR2_PIN,LOW);
          digitalWrite(DIR4_PIN,HIGH);
-         for(int i=0;i<numstep;i++){
+         for(int i=0;i<numstep*4;i++){
             //if(digitalRead(SW)==1){
              digitalWrite(STEP2_PIN,HIGH);
              digitalWrite(STEP4_PIN,HIGH);
-             delay(sleep);
+             delay(sleep1);
              digitalWrite(STEP2_PIN,LOW);
              digitalWrite(STEP4_PIN,LOW);
-             delay(sleep);
+             delay(sleep1);
              
            // }
          }
+
+        digitalWrite(Ms_L,LOW);
+        digitalWrite(Ms_R,LOW);
       }
      if(ch == 'A'){ // หมุนตามตัวทางซ้าย
+      digitalWrite(Ms_L,HIGH);
+         digitalWrite(Ms_R,HIGH);
+         
          digitalWrite(DIR2_PIN,HIGH);
          digitalWrite(DIR4_PIN,LOW);
-         for(int i=0;i<numstep;i++){
+         for(int i=0;i<numstep*4;i++){
             //if(digitalRead(SW)==1){
              digitalWrite(STEP2_PIN,HIGH);
              digitalWrite(STEP4_PIN,HIGH);
-             delay(sleep);
+             delay(sleep1);
              digitalWrite(STEP2_PIN,LOW);
              digitalWrite(STEP4_PIN,LOW);
-             delay(sleep);
+             delay(sleep1);
              
            // }
          }
+
+         digitalWrite(Ms_L,LOW);
+         digitalWrite(Ms_R,LOW);
      }
 }
 
 void front_back_rotate(char ch){
     if(ch == 'd'){ // หมุนทวนทางหน้า
+         digitalWrite(Ms_F,HIGH);
+         digitalWrite(Ms_B,HIGH);
+          
          digitalWrite(DIR1_PIN,LOW);
          digitalWrite(DIR3_PIN,HIGH);
-         for(int i=0;i<numstep;i++){
+         for(int i=0;i<numstep*4;i++){
             //if(digitalRead(SW)==1){
              digitalWrite(STEP1_PIN,HIGH);
              digitalWrite(STEP3_PIN,HIGH);
-             delay(sleep);
+             delay(sleep1);
              digitalWrite(STEP1_PIN,LOW);
              digitalWrite(STEP3_PIN,LOW);
-             delay(sleep);
+             delay(sleep1);
              
            // }
          }
+         digitalWrite(Ms_F,LOW);
+         digitalWrite(Ms_B,LOW);
       }
      if(ch == 'D'){ // หมุนตามตัวทางหน้า
+         digitalWrite(Ms_F,HIGH);
+         digitalWrite(Ms_B,HIGH);
+      
          digitalWrite(DIR1_PIN,HIGH);
          digitalWrite(DIR3_PIN,LOW);
-         for(int i=0;i<numstep;i++){
+         for(int i=0;i<numstep*4;i++){
             //if(digitalRead(SW)==1){
              digitalWrite(STEP1_PIN,HIGH);
              digitalWrite(STEP3_PIN,HIGH);
-             delay(sleep);
+             delay(sleep1);
              digitalWrite(STEP1_PIN,LOW);
              digitalWrite(STEP3_PIN,LOW);
-             delay(sleep);
+             delay(sleep1);
              
            // }
          }
+         digitalWrite(Ms_F,LOW);
+         digitalWrite(Ms_B,LOW);
      }
 }
 
 void left_right_slide(char ch){
    if(ch == 'J'){
       
-       servo1.write(100);
-       delay(250);
+       servo1.write(85);
+       delay(1000);
     }
    if(ch == 'j'){
     
        servo1.write(0);
-       delay(250);
+       delay(1000);
    }
 
 
@@ -285,11 +325,11 @@ void front_back_slide(char ch){
    if(ch == 'k'){
       
        servo2.write(0);
-       delay(250);
+       delay(1000);
     }
    if(ch == 'K'){
-       servo2.write(100);
-       delay(250);
+       servo2.write(80);
+       delay(1000);
        
    }
 }
