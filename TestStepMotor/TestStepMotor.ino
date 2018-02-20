@@ -23,8 +23,8 @@
 
 
 //Create By BomNk
-int sleep = 5;
-int sleep1 = 10;
+int sleep = 3;
+int sleep1 = 1;
 
 //int numstep=520; // 90 Degree
 int numstep = 50;
@@ -74,8 +74,8 @@ void setup(){
     servo1.attach(10);
     servo2.attach(11);
     
-   servo1.write(80);
-   servo2.write(0);
+    servo1.write(90);
+    servo2.write(0);
 
    digitalWrite(Ms_F,LOW);
    digitalWrite(Ms_L,LOW);
@@ -308,7 +308,7 @@ void front_back_rotate(char ch){
 void left_right_slide(char ch){
    if(ch == 'J'){
       
-       servo1.write(85);
+       servo1.write(90);
        delay(1000);
     }
    if(ch == 'j'){
@@ -328,7 +328,7 @@ void front_back_slide(char ch){
        delay(1000);
     }
    if(ch == 'K'){
-       servo2.write(80);
+       servo2.write(85);
        delay(1000);
        
    }
