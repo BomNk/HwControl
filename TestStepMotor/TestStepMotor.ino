@@ -23,7 +23,7 @@
 
 
 //Create By BomNk
-int sleep = 3;
+int sleep = 1;
 int sleep1 = 1;
 
 //int numstep=520; // 90 Degree
@@ -105,9 +105,10 @@ void loop(){
 // ส่วนของการหมุนลูกรูบิค
 void front(char ch){
     if(ch == 'f'){
+       digitalWrite(Ms_F,HIGH);
        //digitalWrite(LED,HIGH);
        digitalWrite(DIR1_PIN,LOW);
-       for(int i=0;i<numstep;i++){
+       for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP1_PIN,HIGH);
            delay(sleep);
@@ -116,11 +117,13 @@ void front(char ch){
            
          // }
        }
+       digitalWrite(Ms_F,LOW);
     }
    if(ch == 'F'){
+       digitalWrite(Ms_F,HIGH);
        //digitalWrite(LED,LOW);
        digitalWrite(DIR1_PIN,HIGH);
-       for(int i=0;i<numstep;i++){
+       for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP1_PIN,HIGH);
            delay(sleep);
@@ -129,13 +132,15 @@ void front(char ch){
            
          // }
        }
+       digitalWrite(Ms_F,LOW);
     }
 }
 void left(char ch){
     if(ch == 'l'){
+      digitalWrite(Ms_L,HIGH);
        //digitalWrite(LED,HIGH);
        digitalWrite(DIR2_PIN,LOW);
-       for(int i=0;i<numstep;i++){
+       for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP2_PIN,HIGH);
            delay(sleep);
@@ -144,10 +149,12 @@ void left(char ch){
            
          // }
        }
+       digitalWrite(Ms_L,LOW);
     }
    if(ch == 'L'){
+      digitalWrite(Ms_L,HIGH);
       digitalWrite(DIR2_PIN,HIGH);
-      for(int i=0;i<numstep;i++){
+      for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP2_PIN,HIGH);
            delay(sleep);
@@ -157,13 +164,15 @@ void left(char ch){
           //}
        
       }
+      digitalWrite(Ms_L,LOW);
    }
 }
 void back(char ch){
     if(ch == 'b'){
+      digitalWrite(Ms_B,HIGH);
        //digitalWrite(LED,HIGH);
        digitalWrite(DIR3_PIN,LOW);
-       for(int i=0;i<numstep;i++){
+       for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP3_PIN,HIGH);
            delay(sleep);
@@ -172,10 +181,12 @@ void back(char ch){
            
          // }
        }
+       digitalWrite(Ms_B,LOW);
     }
    if(ch == 'B'){
+    digitalWrite(Ms_B,HIGH);
    digitalWrite(DIR3_PIN,HIGH);
-   for(int i=0;i<numstep;i++){
+   for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP3_PIN,HIGH);
            delay(sleep);
@@ -185,13 +196,14 @@ void back(char ch){
           //}
        
       }
+      digitalWrite(Ms_B,LOW);
    }
 }
 void right(char ch){
     if(ch == 'r'){
-      
+        digitalWrite(Ms_R,HIGH);
        digitalWrite(DIR4_PIN,LOW);
-       for(int i=0;i<numstep;i++){
+       for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP4_PIN,HIGH);
            delay(sleep);
@@ -200,11 +212,12 @@ void right(char ch){
            
          // }
        }
+       digitalWrite(Ms_R,LOW);
     }
    if(ch == 'R'){
-    
+    digitalWrite(Ms_R,HIGH);
     digitalWrite(DIR4_PIN,HIGH);
-    for(int i=0;i<numstep;i++){
+    for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
            digitalWrite(STEP4_PIN,HIGH);
            delay(sleep);
@@ -214,6 +227,7 @@ void right(char ch){
           //}
        
       }
+      digitalWrite(Ms_R,LOW);
    }
 }
 
