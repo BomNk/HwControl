@@ -9,10 +9,10 @@
 #define DIR4_PIN 9
 #define STEP4_PIN 8
 
-#define Ms_F A0
-#define Ms_L A1
-#define Ms_B A2
-#define Ms_R A3
+#define Enable_F A0
+#define Enable_L A1
+#define Enable_B A2
+#define Enable_R A3
 /*
 #define DIR5_PIN 10
 #define STEP5_PIN 11
@@ -66,10 +66,10 @@ void setup(){
     pinMode(DIR6_PIN,OUTPUT);
     pinMode(STEP6_PIN,OUTPUT);*/
 
-    pinMode(Ms_F,OUTPUT);
-    pinMode(Ms_L,OUTPUT);
-    pinMode(Ms_B,OUTPUT);
-    pinMode(Ms_R,OUTPUT);
+    pinMode(Enable_F,OUTPUT);
+    pinMode(Enable_L,OUTPUT);
+    pinMode(Enable_B,OUTPUT);
+    pinMode(Enable_R,OUTPUT);
 
     servo1.attach(10);
     servo2.attach(11);
@@ -77,10 +77,10 @@ void setup(){
     servo1.write(90);
     servo2.write(0);
 
-   digitalWrite(Ms_F,LOW);
-   digitalWrite(Ms_L,LOW);
-   digitalWrite(Ms_B,LOW);
-   digitalWrite(Ms_R,LOW);
+   digitalWrite(Enable_F,HIGH);
+   digitalWrite(Enable_L,HIGH);
+   digitalWrite(Enable_B,HIGH);
+   digitalWrite(Enable_R,HIGH);
    
     Serial.begin(9600);
     
@@ -105,8 +105,25 @@ void loop(){
 // ส่วนของการหมุนลูกรูบิค
 void front(char ch){
     if(ch == 'f'){
-       digitalWrite(Ms_F,HIGH);
+      
+       digitalWrite(Enable_F,LOW);
        //digitalWrite(LED,HIGH);
+        digitalWrite(DIR1_PIN,LOW);
+        for(int i=0;i<30;i++){
+           digitalWrite(STEP1_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP1_PIN,LOW);
+           delay(sleep);
+        }
+        digitalWrite(DIR1_PIN,HIGH);
+        for(int i=0;i<30;i++){
+           digitalWrite(STEP1_PIN,HIGH);
+           delay(sleep);
+           digitalWrite(STEP1_PIN,LOW);
+           delay(sleep);
+        }
+
+       
        digitalWrite(DIR1_PIN,LOW);
        for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
@@ -117,10 +134,10 @@ void front(char ch){
            
          // }
        }
-       digitalWrite(Ms_F,LOW);
+       digitalWrite(Enable_F,HIGH);
     }
    if(ch == 'F'){
-       digitalWrite(Ms_F,HIGH);
+       digitalWrite(Enable_F,LOW);
        //digitalWrite(LED,LOW);
        digitalWrite(DIR1_PIN,HIGH);
        for(int i=0;i<numstep*4;i++){
@@ -132,12 +149,12 @@ void front(char ch){
            
          // }
        }
-       digitalWrite(Ms_F,LOW);
+       digitalWrite(Enable_F,HIGH);
     }
 }
 void left(char ch){
     if(ch == 'l'){
-      digitalWrite(Ms_L,HIGH);
+      digitalWrite(Enable_L,LOW);
        //digitalWrite(LED,HIGH);
        digitalWrite(DIR2_PIN,LOW);
        for(int i=0;i<numstep*4;i++){
@@ -149,10 +166,10 @@ void left(char ch){
            
          // }
        }
-       digitalWrite(Ms_L,LOW);
+       digitalWrite(Enable_L,HIGH);
     }
    if(ch == 'L'){
-      digitalWrite(Ms_L,HIGH);
+      digitalWrite(Enable_L,LOW);
       digitalWrite(DIR2_PIN,HIGH);
       for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
@@ -164,12 +181,12 @@ void left(char ch){
           //}
        
       }
-      digitalWrite(Ms_L,LOW);
+      digitalWrite(Enable_L,HIGH);
    }
 }
 void back(char ch){
     if(ch == 'b'){
-      digitalWrite(Ms_B,HIGH);
+      digitalWrite(Enable_B,LOW);
        //digitalWrite(LED,HIGH);
        digitalWrite(DIR3_PIN,LOW);
        for(int i=0;i<numstep*4;i++){
@@ -181,10 +198,10 @@ void back(char ch){
            
          // }
        }
-       digitalWrite(Ms_B,LOW);
+       digitalWrite(Enable_B,HIGH);
     }
    if(ch == 'B'){
-    digitalWrite(Ms_B,HIGH);
+    digitalWrite(Enable_B,LOW);
    digitalWrite(DIR3_PIN,HIGH);
    for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
@@ -196,12 +213,12 @@ void back(char ch){
           //}
        
       }
-      digitalWrite(Ms_B,LOW);
+      digitalWrite(Enable_B,HIGH);
    }
 }
 void right(char ch){
     if(ch == 'r'){
-        digitalWrite(Ms_R,HIGH);
+        digitalWrite(Enable_R,LOW);
        digitalWrite(DIR4_PIN,LOW);
        for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
@@ -212,10 +229,10 @@ void right(char ch){
            
          // }
        }
-       digitalWrite(Ms_R,LOW);
+       digitalWrite(Enable_R,HIGH);
     }
    if(ch == 'R'){
-    digitalWrite(Ms_R,HIGH);
+    digitalWrite(Enable_R,LOW);
     digitalWrite(DIR4_PIN,HIGH);
     for(int i=0;i<numstep*4;i++){
           //if(digitalRead(SW)==1){
@@ -227,14 +244,14 @@ void right(char ch){
           //}
        
       }
-      digitalWrite(Ms_R,LOW);
+      digitalWrite(Enable_R,HIGH);
    }
 }
 
 void left_right_rotate(char ch){
   if(ch == 'a'){ // หมุนทวนทางซ้าย
-         digitalWrite(Ms_L,HIGH);
-         digitalWrite(Ms_R,HIGH);
+         digitalWrite(Enable_L,LOW);
+         digitalWrite(Enable_R,LOW);
          
          digitalWrite(DIR2_PIN,LOW);
          digitalWrite(DIR4_PIN,HIGH);
@@ -250,12 +267,12 @@ void left_right_rotate(char ch){
            // }
          }
 
-        digitalWrite(Ms_L,LOW);
-        digitalWrite(Ms_R,LOW);
+        digitalWrite(Enable_L,HIGH);
+        digitalWrite(Enable_R,HIGH);
       }
      if(ch == 'A'){ // หมุนตามตัวทางซ้าย
-      digitalWrite(Ms_L,HIGH);
-         digitalWrite(Ms_R,HIGH);
+      digitalWrite(Enable_L,LOW);
+         digitalWrite(Enable_R,LOW);
          
          digitalWrite(DIR2_PIN,HIGH);
          digitalWrite(DIR4_PIN,LOW);
@@ -271,15 +288,15 @@ void left_right_rotate(char ch){
            // }
          }
 
-         digitalWrite(Ms_L,LOW);
-         digitalWrite(Ms_R,LOW);
+         digitalWrite(Enable_L,HIGH);
+         digitalWrite(Enable_R,HIGH);
      }
 }
 
 void front_back_rotate(char ch){
     if(ch == 'd'){ // หมุนทวนทางหน้า
-         digitalWrite(Ms_F,HIGH);
-         digitalWrite(Ms_B,HIGH);
+         digitalWrite(Enable_F,LOW);
+         digitalWrite(Enable_B,LOW);
           
          digitalWrite(DIR1_PIN,LOW);
          digitalWrite(DIR3_PIN,HIGH);
@@ -294,12 +311,12 @@ void front_back_rotate(char ch){
              
            // }
          }
-         digitalWrite(Ms_F,LOW);
-         digitalWrite(Ms_B,LOW);
+         digitalWrite(Enable_F,HIGH);
+         digitalWrite(Enable_B,HIGH);
       }
      if(ch == 'D'){ // หมุนตามตัวทางหน้า
-         digitalWrite(Ms_F,HIGH);
-         digitalWrite(Ms_B,HIGH);
+         digitalWrite(Enable_F,LOW);
+         digitalWrite(Enable_B,LOW);
       
          digitalWrite(DIR1_PIN,HIGH);
          digitalWrite(DIR3_PIN,LOW);
@@ -314,8 +331,8 @@ void front_back_rotate(char ch){
              
            // }
          }
-         digitalWrite(Ms_F,LOW);
-         digitalWrite(Ms_B,LOW);
+         digitalWrite(Enable_F,HIGH);
+         digitalWrite(Enable_B,HIGH);
      }
 }
 
